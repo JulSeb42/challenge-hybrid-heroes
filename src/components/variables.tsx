@@ -1,3 +1,4 @@
+// To keep consistency, I usually use variables like these ones
 const variables = {
     colors: {
         cardBackground: "#F8F9FC",

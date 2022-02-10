@@ -1,3 +1,5 @@
+// Image container component
+// Since the image can also be empty, I added this component not to repeat the styles
 // Packages
 import React from "react"
 import { StyleSheet, View } from "react-native"
@@ -6,7 +8,6 @@ import { StyleSheet, View } from "react-native"
 import variables from "./variables"
 
 export default function ImageContainer({ children }) {
-    // Since the image can also be empty, I added this component not to repeat the styles
     return <View style={styles.container}>{children}</View>
 }
 

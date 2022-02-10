@@ -9,6 +9,7 @@ import { SafeAreaView } from "react-native-safe-area-context"
 import { StackScreenProps } from "@react-navigation/stack"
 
 import ProductCard from "./components/ProductCard"
+import variables from "./components/variables"
 
 export default (props: StackScreenProps<{}>) => {
     const fetching = useSelector((state: RootState) => state.inventory.fetching)
@@ -37,7 +38,11 @@ export default (props: StackScreenProps<{}>) => {
                 }
                 style={{ padding: 0 }}
             >
-                <SafeAreaView style={{ padding: 0 }}>
+                <SafeAreaView
+                    // Disable default padding
+                    edges={["bottom", "left", "right"]}
+                    style={{ paddingTop: 0, marginTop: 0 }}
+                >
                     {/* Map all the products */}
                     <ScrollView style={styles.listProducts}>
                         {inventory.map((record, i) => (
@@ -76,6 +81,6 @@ const styles = StyleSheet.create({
     listProducts: {
         display: "flex",
         flexDirection: "column",
-        padding: 16,
+        padding: variables.spacings.l,
     },
 })

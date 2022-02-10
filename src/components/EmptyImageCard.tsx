@@ -1,3 +1,4 @@
+// Empty state image card component
 // Packages
 import React from "react"
 import { Image, StyleSheet } from "react-native"

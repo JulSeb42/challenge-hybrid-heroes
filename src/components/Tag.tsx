@@ -1,3 +1,4 @@
+// Category tag component
 // Packages
 import React from "react"
 import { View, Text, StyleSheet } from "react-native"
@@ -8,6 +9,7 @@ import variables from "./variables"
 export default function Tag({ children, ...props }) {
     return (
         <View style={[styles.container, props.last && styles.noMargin]}>
+            {/* For border radiuses on iOS we have to wrap the text inside a <View> component */}
             <Text style={styles.tag}>{children}</Text>
         </View>
     )

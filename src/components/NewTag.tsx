@@ -1,3 +1,4 @@
+// "New" tag component
 // Packages
 import React from "react"
 import { View, Text, StyleSheet } from "react-native"

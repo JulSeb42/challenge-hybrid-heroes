@@ -1,9 +1,7 @@
+// Product card component
 // Packages
 import React from "react"
 import { View, Text, StyleSheet } from "react-native"
-
-// Format date with Moment js
-import Moment from "moment"
 
 // Components
 import CardContainer from "./CardContainer"
@@ -23,10 +21,6 @@ export default function ProductCard({ record }) {
     const datePosted = new Date(record.fields["Posted"])
     const differenceDays = Math.round(Math.abs((today - datePosted) / day))
 
-    // Format date
-    Moment.locale("en")
-    const postedDate = Moment(record.fields["Posted"]).format("DD.MM.yyyy")
-
     // Get tags
     const tags =
         record.fields["Product Categories"] &&
@@ -45,7 +39,7 @@ export default function ProductCard({ record }) {
                 <View style={styles.header}>
                     <TextContainer
                         title={record.fields["Product Name"]}
-                        date={postedDate}
+                        date={record.fields["Posted"]}
                     />
 
                     {/* Show the "NEW" tag only if the item was posted 7 days ago or less */}
