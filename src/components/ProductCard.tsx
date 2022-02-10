@@ -1,8 +1,6 @@
 // Packages
 import React from "react"
-import { ScrollView, View, Text, StyleSheet } from "react-native"
-
-// import Empty from "../assets/empty-image.svg"
+import { View, Text, StyleSheet } from "react-native"
 
 // Format date with Moment js
 import Moment from "moment"
@@ -13,12 +11,13 @@ import ImageCard from "./ImageCard"
 import EmptyImageCard from "./EmptyImageCard"
 import NewTag from "./NewTag"
 import Tag from "./Tag"
+import TextContainer from "./TextContainer"
 
 // Variables
 import variables from "./variables"
 
 export default function ProductCard({ record }) {
-    // Display "New" badge if the package was added less than 7 days ago
+    // Calculate difference between today and when the product was posted
     const day = 24 * 60 * 60 * 1000
     const today = new Date()
     const datePosted = new Date(record.fields["Posted"])
@@ -44,17 +43,19 @@ export default function ProductCard({ record }) {
 
             <View style={styles.content}>
                 <View style={styles.header}>
-                    <View style={styles.textContainer}>
-                        <Text style={styles.title} numberOfLines={1}>
-                            {record.fields["Product Name"]}
-                        </Text>
+                    <TextContainer
+                        title={record.fields["Product Name"]}
+                        date={postedDate}
+                    />
 
-                        <Text style={styles.date}>{postedDate}</Text>
-                    </View>
-
+                    {/* Show the "NEW" tag only if the item was posted 7 days ago or less */}
                     {differenceDays <= 7 && <NewTag />}
+
+                    {/* Test "NEW" tag */}
+                    {/* {differenceDays <= 10000 && <NewTag />} */}
                 </View>
 
+                {/* Display all the tags */}
                 {tags && (
                     <View style={styles.listTags}>
                         {tags.map((tag, i) => (
@@ -83,23 +84,6 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         flex: 1,
-    },
-
-    textContainer: {
-        flex: 1,
-        display: "flex",
-        flexDirection: "column",
-        marginBottom: variables.spacings.s,
-    },
-
-    title: {
-        fontWeight: "900",
-        fontSize: 20,
-        marginRight: variables.spacings.s,
-    },
-
-    date: {
-        fontSize: 12,
     },
 
     listTags: {

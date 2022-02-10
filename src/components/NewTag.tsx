@@ -25,12 +25,13 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 9,
         borderBottomLeftRadius: 9,
         borderBottomEndRadius: 9,
+        alignSelf: "flex-start",
     },
 
     tagText: {
-        fontSize: 16,
+        fontSize: 14,
         color: variables.colors.white,
         textTransform: "uppercase",
-        fontWeight: "900",
+        fontWeight: "600",
     },
 })

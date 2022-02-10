@@ -15,7 +15,6 @@ const styles = StyleSheet.create({
         backgroundColor: variables.colors.cardBackground,
         padding: variables.spacings.s,
         borderRadius: 4,
-        display: "flex",
         alignContent: "center",
         flexDirection: "row",
     },
