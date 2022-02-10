@@ -8,6 +8,8 @@ import { RootState } from "./store"
 import { SafeAreaView } from "react-native-safe-area-context"
 import { StackScreenProps } from "@react-navigation/stack"
 
+import ProductCard from "./components/ProductCard.jsx"
+
 export default (props: StackScreenProps<{}>) => {
     const fetching = useSelector((state: RootState) => state.inventory.fetching)
     const inventory = useSelector(selectors.selectInventory)
@@ -20,44 +22,18 @@ export default (props: StackScreenProps<{}>) => {
         return unsubscribe
     }, [props.navigation])
 
+    console.log(inventory)
+
     return (
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, backgroundColor: "#FFF" }}>
             <Appbar.Header>
                 <Appbar.Content title="Inventory" />
             </Appbar.Header>
 
-            <ScrollView
-                style={{ flex: 1 }}
-                refreshControl={
-                    <RefreshControl
-                        refreshing={fetching}
-                        onRefresh={() => dispatch(actions.fetchInventory())}
-                    />
-                }
-            >
-                <SafeAreaView>
-                    <DataTable>
-                        <DataTable.Header>
-                            <DataTable.Title>Product Code</DataTable.Title>
-                            <DataTable.Title numeric>Scan Date</DataTable.Title>
-                        </DataTable.Header>
-                        {inventory.map((record, index) => (
-                            <DataTable.Row key={index}>
-                                <DataTable.Cell>
-                                    {record.fields["Product Code"]}
-                                </DataTable.Cell>
-                                <DataTable.Cell numeric>
-                                    {new Date(
-                                        record.fields.Posted
-                                    ).toLocaleDateString()}{" "}
-                                    {new Date(
-                                        record.fields.Posted
-                                    ).toLocaleTimeString()}
-                                </DataTable.Cell>
-                            </DataTable.Row>
-                        ))}
-                    </DataTable>
-                </SafeAreaView>
+            <ScrollView style={styles.listProducts}>
+                {inventory.map((record, i) => (
+                    <ProductCard record={record} key={i} />
+                ))}
             </ScrollView>
 
             <SafeAreaView style={styles.fab}>
@@ -85,4 +61,10 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: "center",
     },
+
+    listProducts: {
+        display: "flex",
+        flexDirection: "column",
+        padding: 16,
+    }
 })
